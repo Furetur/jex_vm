@@ -1,11 +1,10 @@
-use crate::jex::jex_values::to_output_string::ToOutputString;
-use crate::jex::jex_values::values::{JexNull, JexObject, JexValue};
-use crate::jex::runtime_exceptions::{OperatorNotDefined, UnaryOperatorNotDefined};
-use crate::jex::types::JexMachine;
-use crate::machine::exceptions::types::Exception;
-use crate::machine::instruction_pointer::InstructionPointer;
 use scanrs::scanln;
 use std::rc::Rc;
+use crate::jex_values::values::{JexValue, JexObject};
+use extendable_vm::{Exception, InstructionPointer};
+use crate::runtime_exceptions::{OperatorNotDefined, UnaryOperatorNotDefined};
+use crate::jex_values::to_output_string::ToOutputString;
+use crate::types::JexMachine;
 
 pub fn plus(left: JexValue, right: JexValue) -> Result<JexValue, Exception> {
     match (left, right) {
@@ -100,7 +99,7 @@ pub fn less(left: JexValue, right: JexValue) -> Result<JexValue, Exception> {
 
 pub fn print(value: JexValue) -> Result<JexValue, Exception> {
     println!("{}", value.to_output_string());
-    Ok(JexValue::Null(JexNull))
+    Ok(JexValue::null())
 }
 
 // TODO: should be a nullary operator
@@ -126,12 +125,10 @@ pub fn parse_int(value: JexValue) -> Result<JexValue, Exception> {
 
 #[cfg(test)]
 mod tests {
-    use crate::jex::jex_values::values::{JexObject, JexValue};
-    use crate::jex::operators::{
-        divide, equal, greater, less, minus, multiply, negate, not, parse_int, plus, to_string,
-    };
-
     // PLUS
+
+    use crate::jex_values::values::JexValue;
+    use crate::operators::{plus, minus, multiply, divide, negate, to_string, not, equal, greater, less, parse_int};
 
     #[test]
     fn plus_should_add_two_ints() {

@@ -1,17 +1,14 @@
-use crate::jex::instructions::op_codes::JexOpCode;
-use crate::jex::instructions::types::JexInstruction;
-use crate::jex::runtime_exceptions::{ExpectedInstructionArgument, TypeException};
-use crate::jex::types::JexMachine;
-use crate::machine::byte_readable::ByteReadable;
-use crate::machine::exceptions::types::Exception;
-use crate::machine::instruction::Instruction;
-use crate::machine::instruction::InstructionFn::Raw;
-use crate::machine::instruction_pointer::InstructionPointer;
+use crate::instructions::types::JexInstruction;
+use extendable_vm::{Instruction, InstructionPointer, Exception, ByteReadable, InstructionFn};
+use crate::instructions::op_codes::JexOpCode;
+use crate::runtime_exceptions::{ExpectedInstructionArgument, TypeException};
+use std::io::Read;
+use crate::types::JexMachine;
 
 pub const POP_INSTRUCTION: JexInstruction = Instruction {
     op_code: JexOpCode::Pop as u8,
     name: "POP",
-    instruction_fn: Raw {
+    instruction_fn: InstructionFn::Raw {
         byte_arity: 0,
         instruction_fn: pop_instruction,
     },
@@ -20,7 +17,7 @@ pub const POP_INSTRUCTION: JexInstruction = Instruction {
 pub const GET_LOCAL_INSTRUCTION: JexInstruction = Instruction {
     op_code: JexOpCode::GetLocal as u8,
     name: "GET_LOCAL",
-    instruction_fn: Raw {
+    instruction_fn: InstructionFn::Raw {
         byte_arity: 1,
         instruction_fn: get_local_instruction,
     },
@@ -29,7 +26,7 @@ pub const GET_LOCAL_INSTRUCTION: JexInstruction = Instruction {
 pub const SET_LOCAL_INSTRUCTION: JexInstruction = Instruction {
     op_code: JexOpCode::SetLocal as u8,
     name: "SET_LOCAL",
-    instruction_fn: Raw {
+    instruction_fn: InstructionFn::Raw {
         byte_arity: 1,
         instruction_fn: set_local_instruction,
     },
@@ -38,7 +35,7 @@ pub const SET_LOCAL_INSTRUCTION: JexInstruction = Instruction {
 pub const GET_GLOBAL_INSTRUCTION: JexInstruction = Instruction {
     op_code: JexOpCode::GetGlobal as u8,
     name: "GET_GLOBAL",
-    instruction_fn: Raw {
+    instruction_fn: InstructionFn::Raw {
         byte_arity: 1,
         instruction_fn: get_global_instruction,
     },
@@ -47,7 +44,7 @@ pub const GET_GLOBAL_INSTRUCTION: JexInstruction = Instruction {
 pub const DEFINE_GLOBAL_INSTRUCTION: JexInstruction = Instruction {
     op_code: JexOpCode::DefineGlobal as u8,
     name: "DEFINE_GLOBAL",
-    instruction_fn: Raw {
+    instruction_fn: InstructionFn::Raw {
         byte_arity: 1,
         instruction_fn: define_global_instruction,
     },
@@ -56,7 +53,7 @@ pub const DEFINE_GLOBAL_INSTRUCTION: JexInstruction = Instruction {
 pub const SET_GLOBAL_INSTRUCTION: JexInstruction = Instruction {
     op_code: JexOpCode::SetGlobal as u8,
     name: "SET_GLOBAL",
-    instruction_fn: Raw {
+    instruction_fn: InstructionFn::Raw {
         byte_arity: 1,
         instruction_fn: set_global_instruction,
     },

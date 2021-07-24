@@ -1,4 +1,4 @@
-use crate::machine::exceptions::types::{Exception, ExceptionType};
+use extendable_vm::{Exception, ExceptionType};
 
 #[derive(Debug)]
 pub struct NotFoundChunkForFunction(pub usize);

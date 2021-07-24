@@ -1,9 +1,6 @@
-use crate::jex::bytecode_constants::{JexConstant, JexConstantType};
-use crate::machine::byte_readable::ByteReadable;
-use crate::machine::exceptions::types::{Exception, ExceptionType};
-use crate::machine::parsing::constant_parser::ConstantParser;
-use crate::machine::parsing::parsing_exceptions::CodeEndedAt;
-use crate::machine::parsing::raw_bytes::{RawBytes, RawBytesPointer};
+use extendable_vm::{ConstantParser, RawBytesPointer, RawBytes, Exception, ByteReadable, ExceptionType};
+use crate::bytecode_constants::{JexConstant, JexConstantType};
+use extendable_vm::parsing_exceptions::CodeEndedAt;
 
 pub type JexConstantParser = ConstantParser<JexConstant>;
 

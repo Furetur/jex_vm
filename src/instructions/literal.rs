@@ -1,17 +1,13 @@
-use crate::jex::instructions::op_codes::JexOpCode;
-use crate::jex::instructions::types::JexInstruction;
-use crate::jex::runtime_exceptions::ExpectedInstructionArgument;
-use crate::jex::types::JexMachine;
-use crate::machine::byte_readable::ByteReadable;
-use crate::machine::exceptions::types::Exception;
-use crate::machine::instruction::Instruction;
-use crate::machine::instruction::InstructionFn::Raw;
-use crate::machine::instruction_pointer::InstructionPointer;
+use crate::instructions::types::JexInstruction;
+use extendable_vm::{Instruction, InstructionPointer, Exception, ByteReadable, InstructionFn};
+use crate::instructions::op_codes::JexOpCode;
+use crate::types::JexMachine;
+use crate::runtime_exceptions::ExpectedInstructionArgument;
 
 pub const CONSTANT_INSTRUCTION: JexInstruction = Instruction {
     op_code: JexOpCode::Constant as u8,
     name: "CONSTANT",
-    instruction_fn: Raw {
+    instruction_fn: InstructionFn::Raw {
         byte_arity: 1,
         instruction_fn: constant_instruction,
     },

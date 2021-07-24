@@ -1,6 +1,6 @@
-use crate::jex::jex_values::get_type::GetType;
-use crate::jex::jex_values::values::JexValue;
-use crate::machine::exceptions::types::{Exception, ExceptionType};
+use extendable_vm::{Exception, ExceptionType};
+use crate::jex_values::values::JexValue;
+use crate::jex_values::get_type::GetType;
 
 #[derive(Debug)]
 pub struct TypeException(pub String);

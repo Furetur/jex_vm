@@ -1,0 +1,13 @@
+[package]
+name = "jex_vm"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+extendable_vm = "0.1.1-releaseAttempt4"
+clap = "3.0.0-beta.2"
+scanrs = "0.2.1"
+pretty_env_logger = "0.4.0"
+log = "0.4"

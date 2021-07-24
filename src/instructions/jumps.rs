@@ -1,19 +1,15 @@
-use crate::jex::instructions::op_codes::JexOpCode;
-use crate::jex::instructions::types::JexInstruction;
-use crate::jex::jex_values::to_output_string::ToOutputString;
-use crate::jex::jex_values::values::JexFunction;
-use crate::jex::runtime_exceptions::{ExpectedInstructionArgument, TypeException};
-use crate::jex::types::JexMachine;
-use crate::machine::byte_readable::ByteReadable;
-use crate::machine::exceptions::types::Exception;
-use crate::machine::instruction::Instruction;
-use crate::machine::instruction::InstructionFn::Raw;
-use crate::machine::instruction_pointer::InstructionPointer;
+use crate::instructions::types::JexInstruction;
+use extendable_vm::{Instruction, InstructionPointer, Exception, ByteReadable, InstructionFn};
+use crate::instructions::op_codes::JexOpCode;
+use crate::types::JexMachine;
+use crate::runtime_exceptions::{ExpectedInstructionArgument, TypeException};
+use crate::jex_values::values::JexFunction;
+use crate::jex_values::to_output_string::ToOutputString;
 
 pub const JUMP_FORWARD_INSTRUCTION: JexInstruction = Instruction {
     op_code: JexOpCode::JumpForward as u8,
     name: "JUMP_FORWARD",
-    instruction_fn: Raw {
+    instruction_fn: InstructionFn::Raw {
         byte_arity: 1,
         instruction_fn: jump_forward_instruction,
     },
@@ -22,7 +18,7 @@ pub const JUMP_FORWARD_INSTRUCTION: JexInstruction = Instruction {
 pub const JUMP_FORWARD_IF_FALSE_INSTRUCTION: JexInstruction = Instruction {
     op_code: JexOpCode::JumpForwardIfFalse as u8,
     name: "JUMP_FORWARD_IF_FALSE",
-    instruction_fn: Raw {
+    instruction_fn: InstructionFn::Raw {
         byte_arity: 1,
         instruction_fn: jump_forward_if_false_instruction,
     },
@@ -31,7 +27,7 @@ pub const JUMP_FORWARD_IF_FALSE_INSTRUCTION: JexInstruction = Instruction {
 pub const JUMP_BACKWARD: JexInstruction = Instruction {
     op_code: JexOpCode::JumpBackward as u8,
     name: "JUMP_BACKWARD",
-    instruction_fn: Raw {
+    instruction_fn: InstructionFn::Raw {
         byte_arity: 1,
         instruction_fn: jump_backward_instruction,
     },
@@ -40,7 +36,7 @@ pub const JUMP_BACKWARD: JexInstruction = Instruction {
 pub const CALL_INSTRUCTION: JexInstruction = Instruction {
     op_code: JexOpCode::Call as u8,
     name: "CALL",
-    instruction_fn: Raw {
+    instruction_fn: InstructionFn::Raw {
         byte_arity: 1,
         instruction_fn: call_instruction,
     },
@@ -49,7 +45,7 @@ pub const CALL_INSTRUCTION: JexInstruction = Instruction {
 pub const RETURN_INSTRUCTION: JexInstruction = Instruction {
     op_code: JexOpCode::Return as u8,
     name: "RETURN",
-    instruction_fn: Raw {
+    instruction_fn: InstructionFn::Raw {
         byte_arity: 0,
         instruction_fn: return_instruction,
     },

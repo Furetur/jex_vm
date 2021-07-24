@@ -1,11 +1,10 @@
-use crate::jex::syntax_exceptions::{InvalidFunctionChunk, NotFoundChunkForFunction};
-use crate::jex::types::JexMachine;
-use crate::machine::exceptions::types::Exception;
-
-use crate::jex::jex_values::to_output_string::ToOutputString;
 use std::convert::TryFrom;
 use std::fmt::{Debug, Formatter};
 use std::rc::Rc;
+use extendable_vm::Exception;
+use crate::syntax_exceptions::{NotFoundChunkForFunction, InvalidFunctionChunk};
+use crate::jex_values::to_output_string::ToOutputString;
+use crate::types::JexMachine;
 
 #[derive(PartialEq, Eq, Clone)]
 pub enum JexValue {
