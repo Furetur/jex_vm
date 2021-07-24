@@ -1,8 +1,19 @@
-use crate::instructions::types::JexInstruction;
-use crate::instructions::operators::{NEGATE_INSTRUCTION, ADD_INSTRUCTION, SUBTRACT_INSTRUCTION, MULTIPLY_INSTRUCTION, DIVIDE_INSTRUCTION, EQUAL_INSTRUCTION, GREATER_INSTRUCTION, LESS_INSTRUCTION, NOT_INSTRUCTION, TO_STRING_INSTRUCTION, PRINT_INSTRUCTION, NULL_INSTRUCTION, TRUE_INSTRUCTION, FALSE_INSTRUCTION, READ_LINE_INSTRUCTION, PARSE_INT_INSTRUCTION};
+use crate::instructions::jumps::{
+    CALL_INSTRUCTION, JUMP_BACKWARD, JUMP_FORWARD_IF_FALSE_INSTRUCTION, JUMP_FORWARD_INSTRUCTION,
+    RETURN_INSTRUCTION,
+};
 use crate::instructions::literal::CONSTANT_INSTRUCTION;
-use crate::instructions::variable::{POP_INSTRUCTION, GET_LOCAL_INSTRUCTION, SET_LOCAL_INSTRUCTION, GET_GLOBAL_INSTRUCTION, SET_GLOBAL_INSTRUCTION, DEFINE_GLOBAL_INSTRUCTION};
-use crate::instructions::jumps::{JUMP_FORWARD_INSTRUCTION, JUMP_FORWARD_IF_FALSE_INSTRUCTION, JUMP_BACKWARD, CALL_INSTRUCTION, RETURN_INSTRUCTION};
+use crate::instructions::operators::{
+    ADD_INSTRUCTION, DIVIDE_INSTRUCTION, EQUAL_INSTRUCTION, FALSE_INSTRUCTION, GREATER_INSTRUCTION,
+    LESS_INSTRUCTION, MULTIPLY_INSTRUCTION, NEGATE_INSTRUCTION, NOT_INSTRUCTION, NULL_INSTRUCTION,
+    PARSE_INT_INSTRUCTION, PRINT_INSTRUCTION, READ_LINE_INSTRUCTION, SUBTRACT_INSTRUCTION,
+    TO_STRING_INSTRUCTION, TRUE_INSTRUCTION,
+};
+use crate::instructions::types::JexInstruction;
+use crate::instructions::variable::{
+    DEFINE_GLOBAL_INSTRUCTION, GET_GLOBAL_INSTRUCTION, GET_LOCAL_INSTRUCTION, POP_INSTRUCTION,
+    SET_GLOBAL_INSTRUCTION, SET_LOCAL_INSTRUCTION,
+};
 
 mod jumps;
 mod literal;
@@ -42,9 +53,9 @@ pub const JEX_INSTRUCTIONS: [&JexInstruction; 28] = [
 ];
 
 pub mod types {
-    use extendable_vm::{Instruction, InstructionTable};
     use crate::bytecode_constants::JexConstant;
     use crate::jex_values::values::JexValue;
+    use extendable_vm::{Instruction, InstructionTable};
 
     pub type JexInstruction = Instruction<JexConstant, JexValue>;
     pub type JexInstructionTable<'a> = InstructionTable<'a, JexConstant, JexValue>;

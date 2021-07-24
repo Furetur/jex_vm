@@ -1,8 +1,8 @@
-use crate::instructions::types::JexInstruction;
-use extendable_vm::{Instruction, InstructionPointer, Exception, ByteReadable, InstructionFn};
 use crate::instructions::op_codes::JexOpCode;
-use crate::types::JexMachine;
+use crate::instructions::types::JexInstruction;
 use crate::runtime_exceptions::ExpectedInstructionArgument;
+use crate::types::JexMachine;
+use extendable_vm::{ByteReadable, Exception, Instruction, InstructionFn, InstructionPointer};
 
 pub const CONSTANT_INSTRUCTION: JexInstruction = Instruction {
     op_code: JexOpCode::Constant as u8,

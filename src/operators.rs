@@ -1,10 +1,10 @@
+use crate::jex_values::to_output_string::ToOutputString;
+use crate::jex_values::values::{JexObject, JexValue};
+use crate::runtime_exceptions::{OperatorNotDefined, UnaryOperatorNotDefined};
+use crate::types::JexMachine;
+use extendable_vm::{Exception, InstructionPointer};
 use scanrs::scanln;
 use std::rc::Rc;
-use crate::jex_values::values::{JexValue, JexObject};
-use extendable_vm::{Exception, InstructionPointer};
-use crate::runtime_exceptions::{OperatorNotDefined, UnaryOperatorNotDefined};
-use crate::jex_values::to_output_string::ToOutputString;
-use crate::types::JexMachine;
 
 pub fn plus(left: JexValue, right: JexValue) -> Result<JexValue, Exception> {
     match (left, right) {
@@ -128,7 +128,9 @@ mod tests {
     // PLUS
 
     use crate::jex_values::values::JexValue;
-    use crate::operators::{plus, minus, multiply, divide, negate, to_string, not, equal, greater, less, parse_int};
+    use crate::operators::{
+        divide, equal, greater, less, minus, multiply, negate, not, parse_int, plus, to_string,
+    };
 
     #[test]
     fn plus_should_add_two_ints() {

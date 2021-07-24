@@ -1,6 +1,8 @@
-use extendable_vm::{ConstantParser, RawBytesPointer, RawBytes, Exception, ByteReadable, ExceptionType};
 use crate::bytecode_constants::{JexConstant, JexConstantType};
 use extendable_vm::parsing_exceptions::CodeEndedAt;
+use extendable_vm::{
+    ByteReadable, ConstantParser, Exception, ExceptionType, RawBytes, RawBytesPointer,
+};
 
 pub type JexConstantParser = ConstantParser<JexConstant>;
 

@@ -1,9 +1,8 @@
-use std::fmt;
-use std::fmt::{Debug, Formatter};
-use crate::jex_values::values::{JexValue, JexFunction};
-use extendable_vm::{Exception, Chunk};
+use crate::jex_values::values::{JexFunction, JexValue};
 use crate::runtime_exceptions::TypeException;
 use crate::types::JexMachine;
+use extendable_vm::Exception;
+use std::fmt::Debug;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum JexConstant {

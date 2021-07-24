@@ -1,8 +1,11 @@
-use crate::instructions::types::JexInstruction;
-use extendable_vm::{Instruction, InstructionFn};
-use crate::operators::{negate, plus, minus, multiply, divide, equal, greater, less, not, to_string, print, read_line, parse_int};
 use crate::instructions::op_codes::JexOpCode;
+use crate::instructions::types::JexInstruction;
 use crate::jex_values::values::JexValue;
+use crate::operators::{
+    divide, equal, greater, less, minus, multiply, negate, not, parse_int, plus, print, read_line,
+    to_string,
+};
+use extendable_vm::{Instruction, InstructionFn};
 
 pub const NEGATE_INSTRUCTION: JexInstruction = Instruction {
     op_code: JexOpCode::Negate as u8,
