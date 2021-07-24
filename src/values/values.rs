@@ -1,6 +1,6 @@
-use crate::values::to_output_string::ToOutputString;
 use crate::exceptions::static_exceptions::{InvalidFunctionChunk, NotFoundChunkForFunction};
 use crate::types::JexMachine;
+use crate::values::to_output_string::ToOutputString;
 use extendable_vm::Exception;
 use std::convert::TryFrom;
 use std::fmt::{Debug, Formatter};

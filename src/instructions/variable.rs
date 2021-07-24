@@ -1,6 +1,6 @@
+use crate::exceptions::runtime_exceptions::{ExpectedInstructionArgument, TypeException};
 use crate::instructions::op_codes::JexOpCode;
 use crate::instructions::types::JexInstruction;
-use crate::exceptions::runtime_exceptions::{ExpectedInstructionArgument, TypeException};
 use crate::types::JexMachine;
 use extendable_vm::{ByteReadable, Exception, Instruction, InstructionFn, InstructionPointer};
 

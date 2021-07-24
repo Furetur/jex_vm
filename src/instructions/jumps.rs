@@ -1,9 +1,9 @@
+use crate::exceptions::runtime_exceptions::{ExpectedInstructionArgument, TypeException};
 use crate::instructions::op_codes::JexOpCode;
 use crate::instructions::types::JexInstruction;
+use crate::types::JexMachine;
 use crate::values::to_output_string::ToOutputString;
 use crate::values::values::JexFunction;
-use crate::exceptions::runtime_exceptions::{ExpectedInstructionArgument, TypeException};
-use crate::types::JexMachine;
 use extendable_vm::{ByteReadable, Exception, Instruction, InstructionFn, InstructionPointer};
 
 pub const JUMP_FORWARD_INSTRUCTION: JexInstruction = Instruction {

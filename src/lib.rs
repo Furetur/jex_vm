@@ -6,10 +6,10 @@ use crate::instructions::JEX_INSTRUCTIONS;
 use crate::types::JexMachine;
 use crate::values::values::{JexFunction, JexValue};
 
-pub mod instructions;
-pub mod values;
 pub mod code;
 pub mod exceptions;
+pub mod instructions;
+pub mod values;
 
 pub fn build_jex_machine(code: &Code<JexConstant>) -> JexMachine {
     let instruction_table = InstructionTable::instructions(&JEX_INSTRUCTIONS);
