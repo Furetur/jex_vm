@@ -1,6 +1,6 @@
-use crate::jex_values::to_output_string::ToOutputString;
-use crate::jex_values::values::{JexObject, JexValue};
-use crate::runtime_exceptions::{OperatorNotDefined, UnaryOperatorNotDefined};
+use crate::values::to_output_string::ToOutputString;
+use crate::values::values::{JexObject, JexValue};
+use crate::exceptions::runtime_exceptions::{OperatorNotDefined, UnaryOperatorNotDefined};
 use crate::types::JexMachine;
 use extendable_vm::{Exception, InstructionPointer};
 use scanrs::scanln;
@@ -127,8 +127,8 @@ pub fn parse_int(value: JexValue) -> Result<JexValue, Exception> {
 mod tests {
     // PLUS
 
-    use crate::jex_values::values::JexValue;
-    use crate::operators::{
+    use crate::values::values::JexValue;
+    use crate::instructions::operator_implementations::{
         divide, equal, greater, less, minus, multiply, negate, not, parse_int, plus, to_string,
     };
 

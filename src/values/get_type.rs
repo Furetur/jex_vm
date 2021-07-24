@@ -1,4 +1,4 @@
-use crate::jex_values::values::{JexFunction, JexNull, JexObject, JexValue};
+use crate::values::values::{JexFunction, JexNull, JexObject, JexValue};
 
 pub trait GetType {
     fn get_type(&self) -> String;

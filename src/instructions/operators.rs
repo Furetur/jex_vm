@@ -1,7 +1,7 @@
 use crate::instructions::op_codes::JexOpCode;
 use crate::instructions::types::JexInstruction;
-use crate::jex_values::values::JexValue;
-use crate::operators::{
+use crate::values::values::JexValue;
+use crate::instructions::operator_implementations::{
     divide, equal, greater, less, minus, multiply, negate, not, parse_int, plus, print, read_line,
     to_string,
 };

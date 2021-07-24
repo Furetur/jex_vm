@@ -4,7 +4,7 @@ extern crate pretty_env_logger;
 use clap::{AppSettings, Clap};
 use extendable_vm::{CodeParser, ConstantParserTable, RawBytes};
 use jex_vm::build_jex_machine;
-use jex_vm::constant_parsers::JEX_CONSTANT_PARSERS;
+use jex_vm::code::constant_parsers::JEX_CONSTANT_PARSERS;
 
 #[derive(Clap)]
 #[clap(author = "Furetur <furetur@gmail.com>")]

@@ -1,4 +1,4 @@
-use crate::bytecode_constants::{JexConstant, JexConstantType};
+use crate::code::bytecode_constants::{JexConstant, JexConstantType};
 use extendable_vm::parsing_exceptions::CodeEndedAt;
 use extendable_vm::{
     ByteReadable, ConstantParser, Exception, ExceptionType, RawBytes, RawBytesPointer,

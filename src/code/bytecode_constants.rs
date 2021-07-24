@@ -1,5 +1,5 @@
-use crate::jex_values::values::{JexFunction, JexValue};
-use crate::runtime_exceptions::TypeException;
+use crate::values::values::{JexFunction, JexValue};
+use crate::exceptions::runtime_exceptions::TypeException;
 use crate::types::JexMachine;
 use extendable_vm::Exception;
 use std::fmt::Debug;

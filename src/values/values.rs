@@ -1,5 +1,5 @@
-use crate::jex_values::to_output_string::ToOutputString;
-use crate::syntax_exceptions::{InvalidFunctionChunk, NotFoundChunkForFunction};
+use crate::values::to_output_string::ToOutputString;
+use crate::exceptions::static_exceptions::{InvalidFunctionChunk, NotFoundChunkForFunction};
 use crate::types::JexMachine;
 use extendable_vm::Exception;
 use std::convert::TryFrom;

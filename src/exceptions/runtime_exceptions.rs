@@ -1,5 +1,5 @@
-use crate::jex_values::get_type::GetType;
-use crate::jex_values::values::JexValue;
+use crate::values::get_type::GetType;
+use crate::values::values::JexValue;
 use extendable_vm::{Exception, ExceptionType};
 
 #[derive(Debug)]

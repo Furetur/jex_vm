@@ -1,5 +1,5 @@
 use extendable_vm::Chunk;
-use jex_vm::bytecode_constants::JexConstant;
+use jex_vm::code::bytecode_constants::JexConstant;
 use jex_vm::instructions::op_codes::JexOpCode;
 
 pub struct TestChunk {

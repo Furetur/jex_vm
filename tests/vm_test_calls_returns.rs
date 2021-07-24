@@ -1,4 +1,4 @@
-use jex_vm::bytecode_constants::JexConstant;
+use jex_vm::code::bytecode_constants::JexConstant;
 use jex_vm::instructions::op_codes::JexOpCode;
 use run::code::{TestChunk, TestInstruction};
 use run::run_jex::run_chunks;

@@ -4,8 +4,8 @@ pub mod run_jex {
     use crate::run::code::{TestChunk, TestInstruction};
     use extendable_vm::{Chunk, Code};
     use jex_vm::build_jex_machine;
-    use jex_vm::bytecode_constants::JexConstant;
-    use jex_vm::jex_values::values::JexValue;
+    use jex_vm::code::bytecode_constants::JexConstant;
+    use jex_vm::values::values::JexValue;
 
     pub fn run_chunks(chunks: Vec<TestChunk>) -> Option<JexValue> {
         let mut compiled_chunks: Vec<Chunk<JexConstant>> = vec![];

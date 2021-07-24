@@ -20,6 +20,7 @@ mod literal;
 pub mod op_codes;
 mod operators;
 mod variable;
+pub mod operator_implementations;
 
 pub const JEX_INSTRUCTIONS: [&JexInstruction; 28] = [
     &NEGATE_INSTRUCTION,
@@ -53,9 +54,10 @@ pub const JEX_INSTRUCTIONS: [&JexInstruction; 28] = [
 ];
 
 pub mod types {
-    use crate::bytecode_constants::JexConstant;
-    use crate::jex_values::values::JexValue;
     use extendable_vm::{Instruction, InstructionTable};
+
+    use crate::code::bytecode_constants::JexConstant;
+    use crate::values::values::JexValue;
 
     pub type JexInstruction = Instruction<JexConstant, JexValue>;
     pub type JexInstructionTable<'a> = InstructionTable<'a, JexConstant, JexValue>;
