@@ -5,20 +5,23 @@ use extendable_vm::Exception;
 use std::convert::TryFrom;
 use std::fmt::{Debug, Formatter};
 use std::rc::Rc;
+use std::collections::HashMap;
+use std::cell::RefCell;
 
-#[derive(PartialEq, Eq, Clone)]
+#[derive(PartialEq, Clone)]
 pub enum JexValue {
     Null(JexNull),
     Int(i32),
     Bool(bool),
     Object(Rc<JexObject>),
+    Instance(Rc<JexInstance>),
     Function(JexFunction),
 }
 
 #[derive(PartialEq, Eq, Debug, Clone)]
 pub struct JexNull;
 
-#[derive(PartialEq, Eq, Clone)]
+#[derive(PartialEq)]
 pub enum JexObject {
     String(String),
 }
@@ -31,6 +34,10 @@ pub enum JexFunction {
         chunk_id: usize,
         name: String,
     },
+}
+
+pub struct JexInstance {
+    pub fields: RefCell<HashMap<String, JexValue>>
 }
 
 impl JexValue {
@@ -95,6 +102,28 @@ impl JexFunction {
     }
 }
 
+// impl JexInstance {
+//     pub fn new_empty() -> JexInstance {
+//         JexInstance {
+//             fields: RefCell::new(HashMap::new())
+//         }
+//     }
+//     pub fn get_field(&self, field: &str) -> Option<JexValue> {
+//         self.fields.
+//     }
+// }
+
+// TODO: do something with this
+impl PartialEq for JexInstance {
+    fn eq(&self, other: &Self) -> bool {
+        false
+    }
+
+    fn ne(&self, other: &Self) -> bool {
+        true
+    }
+}
+
 impl Debug for JexValue {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
@@ -103,6 +132,7 @@ impl Debug for JexValue {
             JexValue::Null(_) => write!(f, "null"),
             JexValue::Function(func) => write!(f, "{}", func.to_output_string()),
             JexValue::Object(obj) => write!(f, "{:?}", &**obj),
+            JexValue::Instance(_) => write!(f, "object")
         }
     }
 }

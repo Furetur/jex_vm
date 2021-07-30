@@ -12,6 +12,7 @@ impl GetType for JexValue {
             JexValue::Object(obj) => (&**obj).get_type(),
             JexValue::Function(func) => func.get_type(),
             JexValue::Null(null) => null.get_type(),
+            JexValue::Instance(_) => "object".to_string()
         }
     }
 }
