@@ -37,12 +37,15 @@ pub enum JexFunction {
 }
 
 pub struct JexInstance {
-    pub fields: RefCell<HashMap<String, JexValue>>
+    fields: RefCell<HashMap<String, JexValue>>
 }
 
 impl JexValue {
     pub fn null() -> JexValue {
         JexValue::Null(JexNull)
+    }
+    pub fn new_object() -> JexValue {
+        JexValue::Instance(Default::default())
     }
     pub fn from_string(string: String) -> JexValue {
         JexValue::Object(Rc::new(JexObject::String(string)))
@@ -115,6 +118,13 @@ impl JexInstance {
         self.fields.borrow_mut().insert(name, value);
     }
 }
+
+impl Default for JexInstance {
+    fn default() -> Self {
+        JexInstance::new()
+    }
+}
+
 
 
 // TODO: do something with this

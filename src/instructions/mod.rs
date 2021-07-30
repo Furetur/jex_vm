@@ -21,6 +21,7 @@ pub mod op_codes;
 pub mod operator_implementations;
 mod operators;
 mod variable;
+mod objects;
 
 pub const JEX_INSTRUCTIONS: [&JexInstruction; 28] = [
     &NEGATE_INSTRUCTION,
