@@ -6,7 +6,7 @@ use std::convert::TryFrom;
 use std::fmt::{Debug, Formatter};
 use std::rc::Rc;
 use std::collections::HashMap;
-use std::cell::RefCell;
+use std::cell::{RefCell, Cell};
 
 #[derive(PartialEq, Clone)]
 pub enum JexValue {
@@ -102,24 +102,28 @@ impl JexFunction {
     }
 }
 
-// impl JexInstance {
-//     pub fn new_empty() -> JexInstance {
-//         JexInstance {
-//             fields: RefCell::new(HashMap::new())
-//         }
-//     }
-//     pub fn get_field(&self, field: &str) -> Option<JexValue> {
-//         self.fields.
-//     }
-// }
+impl JexInstance {
+    pub fn new() -> JexInstance {
+        JexInstance {
+            fields: RefCell::new(HashMap::new())
+        }
+    }
+    pub fn get_field(&self, name: &str) -> Option<JexValue> {
+        self.fields.borrow().get(name).cloned()
+    }
+    pub fn put_field(&self, name: String, value: JexValue) {
+        self.fields.borrow_mut().insert(name, value);
+    }
+}
+
 
 // TODO: do something with this
 impl PartialEq for JexInstance {
-    fn eq(&self, other: &Self) -> bool {
+    fn eq(&self, _: &Self) -> bool {
         false
     }
 
-    fn ne(&self, other: &Self) -> bool {
+    fn ne(&self, _: &Self) -> bool {
         true
     }
 }
