@@ -41,7 +41,7 @@ fn get_field_instruction(
         .code
         .get_constant(args.chunk_id, usize::from(constant_id))?
         .as_string()?;
-    let receiver = machine.peek_operand()?;
+    let receiver = machine.pop_operand()?;
     if let JexValue::Instance(instance) = receiver {
         let field = instance
             .get_field(field_name.as_str())
@@ -49,7 +49,7 @@ fn get_field_instruction(
         machine.push_operand(field);
         Ok(())
     } else {
-        Err(Exception::from(NotObjectException::new(receiver)))
+        Err(Exception::from(NotObjectException::new(&receiver)))
     }
 }
 
