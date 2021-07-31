@@ -8,7 +8,7 @@ use std::convert::TryFrom;
 use std::fmt::{Debug, Formatter};
 use std::rc::Rc;
 
-#[derive(PartialEq, Clone)]
+#[derive(Clone)]
 pub enum JexValue {
     Null(JexNull),
     Int(i32),
@@ -135,14 +135,23 @@ impl Default for JexInstance {
     }
 }
 
-// TODO: do something with this
-impl PartialEq for JexInstance {
-    fn eq(&self, _: &Self) -> bool {
-        false
+impl PartialEq for JexValue {
+    fn eq(&self, other: &Self) -> bool {
+        match (self, other) {
+            (JexValue::Int(i1), JexValue::Int(i2)) => i1 == i2,
+            (JexValue::Bool(b1), JexValue::Bool(b2)) => b1 == b2,
+            (JexValue::Null(_), JexValue::Null(_)) => true,
+            (JexValue::Object(o1), JexValue::Object(o2)) => o1 == o2,
+            (JexValue::Function(f1), JexValue::Function(f2)) => f1 == f2,
+            (JexValue::Instance(i1), JexValue::Instance(i2)) => {
+                &**i1 as *const JexInstance == &**i2 as *const JexInstance
+            }
+            _ => false,
+        }
     }
 
-    fn ne(&self, _: &Self) -> bool {
-        true
+    fn ne(&self, other: &Self) -> bool {
+        !self.eq(other)
     }
 }
 
@@ -164,5 +173,41 @@ impl Debug for JexObject {
         match self {
             JexObject::String(s) => write!(f, "\"{}\"", s),
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::values::values::JexValue;
+
+    #[test]
+    fn cloned_strings_should_be_equal() {
+        let str = JexValue::from_string("a".to_string());
+        let str2 = str.clone();
+        assert_eq!(str, str2);
+    }
+    #[test]
+    fn identical_strings_should_be_equal() {
+        let str = JexValue::from_string("a".to_string());
+        let str2 = JexValue::from_string("a".to_string());
+        assert_eq!(str, str2);
+    }
+    #[test]
+    fn different_strings_should_be_equal() {
+        let str = JexValue::from_string("a".to_string());
+        let str2 = JexValue::from_string("b".to_string());
+        assert_ne!(str, str2);
+    }
+    #[test]
+    fn two_empty_objects_should_not_be_equal() {
+        let obj = JexValue::new_object();
+        let obj2 = JexValue::new_object();
+        assert_ne!(obj, obj2);
+    }
+    #[test]
+    fn two_cloned_objects_should_be_equal() {
+        let obj = JexValue::new_object();
+        let obj2 = obj.clone();
+        assert_eq!(obj, obj2);
     }
 }
