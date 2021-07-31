@@ -87,9 +87,9 @@ dependencies = [
 
 [[package]]
 name = "extendable_vm"
-version = "0.1.1-releaseAttempt4"
+version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e9d92099d8c355a37966caf2e88845077d6dbf72fe977bce2732b94fa27d44af"
+checksum = "d685eb45a142dce14a1a0e7861e266e66560f2902aed75ea6e71c4a60df3fc7c"
 dependencies = [
  "log",
  "pretty_env_logger",

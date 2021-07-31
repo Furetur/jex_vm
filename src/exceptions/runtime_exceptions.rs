@@ -87,3 +87,38 @@ impl From<OperatorNotDefined> for Exception {
         }
     }
 }
+
+#[derive(Debug)]
+pub struct NotObjectException(String);
+
+impl NotObjectException {
+    pub fn new(value: &JexValue) -> NotObjectException {
+        NotObjectException(value.get_type())
+    }
+}
+
+impl From<NotObjectException> for Exception {
+    fn from(exception: NotObjectException) -> Self {
+        Exception {
+            exception_type: ExceptionType::Runtime,
+            name: "NotObjectException".to_string(),
+            message: format!(
+                "Tried to get or set field of {} but only objects have fields",
+                exception.0
+            ),
+        }
+    }
+}
+
+#[derive(Debug)]
+pub struct FieldNotFound(pub String);
+
+impl From<FieldNotFound> for Exception {
+    fn from(exception: FieldNotFound) -> Self {
+        Exception {
+            exception_type: ExceptionType::Runtime,
+            name: "FieldNotFound".to_string(),
+            message: format!("Field {} of object not found", exception.0),
+        }
+    }
+}

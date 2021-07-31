@@ -13,6 +13,7 @@ impl ToOutputString for JexValue {
             JexValue::Bool(bool) => bool.to_output_string(),
             JexValue::Function(func) => func.to_output_string(),
             JexValue::Object(obj) => obj.to_output_string(),
+            JexValue::Instance(_) => "object".to_string(),
         }
     }
 }

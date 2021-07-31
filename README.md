@@ -16,10 +16,11 @@ You can learn more about Jex [here](https://github.com/Furetur/JexCompiler) as w
 
 This is a stack VM that supports
 
-* Booleans, Strings, Ints and Functions
-* Basic operations like addition, multiplication, concatenation, etc
-* Conditional jumps, function calls and returns
-* Exceptions that halt the machine and print the stack trace
+ - [x] Booleans, Strings, Ints and Functions
+ - [x] Basic operations like addition, multiplication, concatenation, etc
+ - [x] Conditional jumps, function calls and returns
+ - [x] Exceptions that halt the machine and print the stack trace
+ - [x] Heap allocated objects
 
 ## How to Run
 
@@ -88,6 +89,12 @@ Jump forward if false | 21 | *offset*: `u8` | [x] → [] | Jumps forward by `off
 Jump Backward | 22 | *offset*: `u8` | | Jumps backward by `offset` bytes 
 Call | 23 | *arity*: `u8` | | Calls a function with `arity` arguments. For example, `CALL 3` will call `f(a, b, c)` when stack is `[f, a, b, c]`
 Return | 24 | | Pops the last call frame and puts the returned value on top | Returns from the function ToString | 25 | | [x] → [string representation of x] | Converts a value to string
+To string | 25 |  | [x] → [str(x)] | Converts value to string
+Read line | 26 | | [] -> [x] | Suspends the VM and reads a like from STDIN
+Parse int | 27 | | [x] -> [int(x)] | Parses string as int. If string cannot be parsed returns null
+New instance | 28 | | [] → [x] | Creates an empty instance
+Get field | 29 | *constant_id*: `u8` | [obj] -> [field_value] | Gets a field of obj: `obj[str_constant]`
+Set field | 30 | *constant_id*: `u8` | [obj, value] -> [obj] | Sets a field of obj `obj[str_constant] = value`
 
 ## Bytecode format
 
