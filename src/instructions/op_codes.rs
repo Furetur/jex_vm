@@ -28,7 +28,7 @@ pub enum JexOpCode {
     ToString = 25,
     ReadLine = 26,
     ParseInt = 27,
-    NewObject = 28,
+    NewInstance = 28,
     GetField = 29,
-    SetField = 30
+    SetField = 30,
 }

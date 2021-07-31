@@ -7,9 +7,9 @@ use crate::types::JexMachine;
 use crate::values::values::JexValue;
 use extendable_vm::{ByteReadable, Exception, Instruction, InstructionFn, InstructionPointer};
 
-pub const NEW_OBJECT_INSTRUCTION: JexInstruction = Instruction {
-    op_code: JexOpCode::NewObject as u8,
-    name: "NEW_OBJECT",
+pub const NEW_INSTANCE_INSTRUCTION: JexInstruction = Instruction {
+    op_code: JexOpCode::NewInstance as u8,
+    name: "NEW_INSTANCE",
     instruction_fn: InstructionFn::Const(|| JexValue::new_object()),
 };
 

@@ -3,6 +3,9 @@ use crate::instructions::jumps::{
     RETURN_INSTRUCTION,
 };
 use crate::instructions::literal::CONSTANT_INSTRUCTION;
+use crate::instructions::objects::{
+    GET_FIELD_INSTRUCTION, NEW_INSTANCE_INSTRUCTION, SET_FIELD_INSTRUCTION,
+};
 use crate::instructions::operators::{
     ADD_INSTRUCTION, DIVIDE_INSTRUCTION, EQUAL_INSTRUCTION, FALSE_INSTRUCTION, GREATER_INSTRUCTION,
     LESS_INSTRUCTION, MULTIPLY_INSTRUCTION, NEGATE_INSTRUCTION, NOT_INSTRUCTION, NULL_INSTRUCTION,
@@ -17,13 +20,13 @@ use crate::instructions::variable::{
 
 mod jumps;
 mod literal;
+mod objects;
 pub mod op_codes;
 pub mod operator_implementations;
 mod operators;
 mod variable;
-mod objects;
 
-pub const JEX_INSTRUCTIONS: [&JexInstruction; 28] = [
+pub const JEX_INSTRUCTIONS: [&JexInstruction; 31] = [
     &NEGATE_INSTRUCTION,
     &ADD_INSTRUCTION,
     &SUBTRACT_INSTRUCTION,
@@ -52,6 +55,9 @@ pub const JEX_INSTRUCTIONS: [&JexInstruction; 28] = [
     &RETURN_INSTRUCTION,
     &READ_LINE_INSTRUCTION,
     &PARSE_INT_INSTRUCTION,
+    &NEW_INSTANCE_INSTRUCTION,
+    &GET_FIELD_INSTRUCTION,
+    &SET_FIELD_INSTRUCTION,
 ];
 
 pub mod types {

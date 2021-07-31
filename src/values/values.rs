@@ -2,11 +2,11 @@ use crate::exceptions::static_exceptions::{InvalidFunctionChunk, NotFoundChunkFo
 use crate::types::JexMachine;
 use crate::values::to_output_string::ToOutputString;
 use extendable_vm::Exception;
+use std::cell::{Cell, RefCell};
+use std::collections::HashMap;
 use std::convert::TryFrom;
 use std::fmt::{Debug, Formatter};
 use std::rc::Rc;
-use std::collections::HashMap;
-use std::cell::{RefCell, Cell};
 
 #[derive(PartialEq, Clone)]
 pub enum JexValue {
@@ -37,7 +37,7 @@ pub enum JexFunction {
 }
 
 pub struct JexInstance {
-    fields: RefCell<HashMap<String, JexValue>>
+    fields: RefCell<HashMap<String, JexValue>>,
 }
 
 impl JexValue {
@@ -82,6 +82,13 @@ impl JexValue {
         let JexObject::String(string) = self.as_object()?;
         Some(string)
     }
+    pub fn as_instance(&self) -> Option<&JexInstance> {
+        if let JexValue::Instance(instance) = self {
+            Some(&**instance)
+        } else {
+            None
+        }
+    }
 }
 
 impl JexFunction {
@@ -108,8 +115,11 @@ impl JexFunction {
 impl JexInstance {
     pub fn new() -> JexInstance {
         JexInstance {
-            fields: RefCell::new(HashMap::new())
+            fields: RefCell::new(HashMap::new()),
         }
+    }
+    pub fn is_empty(&self) -> bool {
+        self.fields.borrow().is_empty()
     }
     pub fn get_field(&self, name: &str) -> Option<JexValue> {
         self.fields.borrow().get(name).cloned()
@@ -124,8 +134,6 @@ impl Default for JexInstance {
         JexInstance::new()
     }
 }
-
-
 
 // TODO: do something with this
 impl PartialEq for JexInstance {
@@ -146,7 +154,7 @@ impl Debug for JexValue {
             JexValue::Null(_) => write!(f, "null"),
             JexValue::Function(func) => write!(f, "{}", func.to_output_string()),
             JexValue::Object(obj) => write!(f, "{:?}", &**obj),
-            JexValue::Instance(_) => write!(f, "object")
+            JexValue::Instance(_) => write!(f, "object"),
         }
     }
 }
